@@ -1,0 +1,61 @@
+// Problem 2: 
+// Given an array of random numbers sort it using
+//   a. BubbleSort: Bubble sort
+//   b. SelectionSort: Selection sort
+
+// Start: 11:17 am
+// End: 11:55 am
+
+public int[] bubbleSort(int[] arr) {
+	boolean ranOnce = false;
+	int lastChangeIndex = 0;
+	int temp;
+	int comparisonIndex = arr.length;
+	
+	while (!ranOnce || lastChangeIndex > 0) {
+		lastChangeIndex = 0;
+		for (int i = 0, j = 1; j < comparisonIndex; i++, j++) {
+			if (arr[i] > arr[j]) {
+				temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+				lastChangeIndex = j;
+			}
+		}
+		ranOnce = true;
+		comparisonIndex = lastChangeIndex != 0 ? lastChangeIndex : comparisonIndex;
+	}
+	return arr;
+}
+
+
+// Start: 3:09pm
+// End: 3:25pm
+public int[] selectionSort(int[] arr) {
+	int currentIndex = 0;
+	int indexMinValue, temp;
+	while(currentIndex < arr.length-1) {
+		indexMinValue = findMinValueIndex(arr, currentIndex);
+		temp = arr[currentIndex];
+		arr[currentIndex] = arr[indexMinValue];
+		arr[indexMinValue] = temp;
+		currentIndex++;
+	}
+	return arr;
+}
+
+private int findMinValueIndex(int[] arr, int start){
+	int minValue = arr[start];
+	int minValueIndex = start;
+	
+	for (int i = start + 1; i < arr.length; i++) {
+		if (arr[i] < minValue) {
+			minValue = arr[i];
+			minValueIndex = i;
+		}
+	}
+
+	return minValueIndex;
+}
+
+
