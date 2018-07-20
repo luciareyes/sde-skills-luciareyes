@@ -1,0 +1,63 @@
+// Problem6
+// SplitListOddEven: Given a singly linked list with integer data, create two lists, one with all odd elements,
+// and one with even
+
+public class Node {
+	public int value;
+	public Node next;
+	public Node(int v) {
+		value = v;
+	}
+}
+
+public class LinkedList {
+	public Node head;
+	public Node last;
+	
+	public LinkedList() {
+		head = null;
+		last = null;
+	}
+
+	public void add(Node n) {
+		if (head == null) {
+			head = n;
+			last = head;
+			return;
+		}
+		last.next = n;
+		last = last.next;
+	}
+}
+
+public class OddEvenListPair {
+	public LinkedList odd;
+	public LinkedList even;
+	public OddEvenListPair(LinkedList o, LinkedList e) {
+		odd = o;
+		even = e;
+	}
+}
+
+public OddEvenListPair splitListOddEven(LinkedList list) {
+	if (list == null || list.head == null) {
+		return null;
+	}
+
+	LinkedList odd = new LinkedList();
+	LinkedList even = new LinkedList();
+
+	Node current = list.head;
+	Node new;
+
+	while (current  != null) {
+		new = new Node(current.value);
+		if (current.value % 2 == 0) {
+			even.add(new);
+		} else {
+			odd.add(new);
+		}
+	}
+	return new OddEvenListPair(odd, even);
+}
+

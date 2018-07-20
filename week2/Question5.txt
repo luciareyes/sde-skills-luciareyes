@@ -1,0 +1,35 @@
+// Problem 5
+// InsertSorted: Insert an element into a sorted singly linked list such that it remains sorted after the insert.
+
+Node {
+	public int value;
+	public Node next;
+	public Node() {}
+}
+
+// Returns head of the linked list
+public Node insertSorted (Node head, Node new) {
+	if (head == null)
+		return null;
+
+	if (new == null)
+		return head;
+
+	if (new.value <= head.value) {
+		new.next = head;
+		return new;
+	}
+
+	Node current = head;
+	while (current.next != null) {
+		if (new.value > current.value && new.value <= current.next.value) {
+			new.next = current.next;
+			current.next = new;
+			return head;
+		}
+		current = current.next;
+	}
+
+	current.next = new;
+	return head;
+}
