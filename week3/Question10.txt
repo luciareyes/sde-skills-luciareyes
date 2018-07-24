@@ -1,0 +1,61 @@
+//CloneStack: Implement a Method that duplicates the contents of a stack and creates a copy.
+
+public class ArrayStack<T> implements Cloneable {
+
+  private static final SIZE = 10;
+  private T[] array;
+  private int index = -1;
+
+  public ArrayStack() {
+    array = new T[SIZE];
+  }
+
+  // Not thread safe
+  public ArrayStack<T> cloneShallow() {
+    ArrayStack<T> newStack = new ArrayStack();
+    
+    for (int i = 0; i < index; i++) {
+	newStack.push(array[i]);
+    }
+    return newStack;
+  }
+
+  // Assuming T object has an implemented clone method, otherwise we would need more information about T
+  public ArrayStack<T> cloneDeep() {
+    ArrayStack<T> newStack = new ArrayStack();
+    T elem;
+    T new;
+    
+    for (int i = 0; i < index; i++) {
+	elem = array[i];
+	newStack.push(elem.clone());  
+    }
+    return newStack;
+  }
+
+  public int pop() throws Exception {
+    if (index == -1) {
+      throw new Exception("Stack is empty");
+    }
+
+    return array[index--];
+  }
+
+  public void push(T data) {
+    checkArraySize();
+    array[++index] = data;
+  }
+
+  public boolean isEmpty() {
+    return index < 0;
+  }
+
+  private void checkArraySize() {
+    if (index == (array.length - 1)) {
+      //create a bigger array and copy
+      T[] temp= new T[array.length + SIZE];
+      System.arraycopy(array, 0, temp, 0, array.length);
+      array = temp;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+// ReverseStack: Reverse the data in a stack using a queue
+
+class Stack<T> {
+ public void push(T data);
+ public T pop();
+ public boolean isEmpty();
+}
+
+
+public Queue<T> {
+ public boolean add(T data);
+ public T poll();
+ public boolean isEmpty();
+}
+
+public Stack reverseStack(Stack input) {
+	if (input == null) 
+		return null;
+
+	Queue<T> q = new Queue<T>();
+	while(!input.isEmpty()) {
+		q.add(input.pop());
+	}
+
+	while (!q.isEmpty()) {
+		input.add(q.poll());
+	}
+	return input;
+}

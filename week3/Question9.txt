@@ -1,0 +1,38 @@
+// ArrayStack: Implement a Stack using a fixed size array. Support, Push, Pop operations.
+
+public class ArrayStack<T> {
+
+  private static final SIZE = 10;
+  private T[] array;
+  private int index = -1;
+
+  public ArrayStack() {
+    array = new T[SIZE];
+  }
+
+  public int pop() throws Exception {
+    if (index == -1) {
+      throw new Exception("Stack is empty");
+    }
+
+    return array[index--];
+  }
+
+  public void push(T data) {
+    checkArraySize();
+    array[++index] = data;
+  }
+
+  public boolean isEmpty() {
+    return index < 0;
+  }
+
+  private void checkArraySize() {
+    if (index == (array.length - 1)) {
+      //create a bigger array and copy
+      T[] temp= new T[array.length + SIZE];
+      System.arraycopy(array, 0, temp, 0, array.length);
+      array = temp;
+    }
+  }
+}
